@@ -33,9 +33,11 @@ def create_file() -> None:
 
 if __name__ == "__main__":
     arg = sys.argv[1:]
-    file_exists()
-    if arg[0] == '-o':
+    if len(arg) == 0:
+        print("Incorrect Arguments!")
+    elif arg[0] == '-o':
         # url = check_key(key)
+        file_exists()
         print("nto ok")
     else:
         print("ok")
