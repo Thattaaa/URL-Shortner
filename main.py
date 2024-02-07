@@ -10,12 +10,21 @@ def check_key(key: str) -> str:
     with open('db.txt', 'r') as f:
         stuff = f.readlines()
     for part in stuff:
-        file_key, file_url = part.strip('\n').split(' :: ')
+        file_key, file_url = part.strip('\n').split(' | ')
         if key == file_key:
             return file_url
-        else:
-            return 
+    return None
     
+def check_url(url: str) -> str:
+    # check if url in file
+    with open('db.txt', 'r') as f:
+        stuff = f.readlines()
+    for part in stuff:
+        file_key, file_url = part.strip('\n').split(" | ")
+        if url == file_url:
+            return file_key
+    return None
+
 def write_to_file(key: str, url: str) -> None:
     with open('db.txt', 'a') as f:
         f.write(f'{key} | {url}\n')
@@ -34,8 +43,26 @@ def create_file() -> None:
 if __name__ == "__main__":
     arg = sys.argv[1:]
     file_exists()
-    if arg[0] == '-o':
-        # url = check_key(key)
-        print("nto ok")
+    if len(arg) == 0:
+        print("Incorrect Usage!\nun-shorten URL: main.py -o URL\nshorten URL:    main.py URL")
+    elif arg[0] == '-o':
+        # un-shorten URL
+        if len(arg) == 1:
+            print("No URL!")
+        else:
+            url = arg[1]
+            key = check_key(url)
+            if key == None:
+                print("URL not in file")
+            else:
+                print(key)
     else:
-        print("ok")
+        # shorten URL
+        url = arg[0]
+        test = check_url(url)
+        if test != None:
+            print(f"URL already exists:\n{test}")
+        else:
+            newkey = key_gen(10)
+            write_to_file(newkey, url)
+            print(f"URL shortened!\n{newkey}")
