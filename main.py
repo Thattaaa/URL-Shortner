@@ -55,7 +55,7 @@ if __name__ == "__main__":
             if key == None:
                 print("URL not in file")
             else:
-                print(key)
+                print(f"URL:\n{key}")
     else:
         # shorten URL
         url = arg[0]
