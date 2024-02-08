@@ -1,9 +1,5 @@
 # URL-Shortner
 
-## WIP!!!
-
-## Getting started
-
 ### installation
 
 ```sh
