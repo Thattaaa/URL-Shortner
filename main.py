@@ -1,4 +1,4 @@
-import string, random, sys, os.path
+import string, random, sys, os.path, webbrowser
 
 def key_gen(length: int) -> str:
     letters = string.ascii_letters + string.digits
@@ -56,6 +56,9 @@ if __name__ == "__main__":
                 print("URL not in file")
             else:
                 print(f"URL:\n{key}")
+                a = input("Open in browser? Y/N > ").lower()
+                if a == "y":
+                    webbrowser.open(f'{key}', new=2)
     else:
         # shorten URL
         url = arg[0]
